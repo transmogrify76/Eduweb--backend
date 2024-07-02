@@ -84,7 +84,7 @@ export const loginStudent = asyncHandler(async (req, res) => {
   console.log(isPasswordValid)
 
 
-  if (!isPasswordValid) {
+  if (isPasswordValid) {
     throw new ApiError(401, "Incorrect password");
   }
   const {accessToken,refreshToken} = await generateAccessRefreshToken(student._id)
@@ -178,6 +178,7 @@ export const refreshAccessToken = asyncHandler(async(req,res) =>{
 
 
 
+//change password fuction
 export const changeCurrentPassword = asyncHandler(async (req,res)=>{
   const {oldPassword,newPassWord} = req.body
   const student = await Student.findById(req.student?._id)
@@ -190,6 +191,31 @@ export const changeCurrentPassword = asyncHandler(async (req,res)=>{
   await user.save({validateBeforeSave : false})
   return res.status(200).json(new ApiResponse(200,{},"Password changed successfully"))
 })
+
+
+//update Student details
+export const updateDetails = asyncHandler(async(req,res) => {
+  const {} = req.body
+  if(!firstName || !email || !lastName){
+    throw new ApiError(400,"all fields are required")
+  }
+  const student = await Student.findByIdAndUpdate(
+    req.user?._id,
+    {
+      $set:{
+        firstName,
+        lastName,
+        email
+      }
+    },
+    {new:true}
+
+  ).select("-password")
+
+  return res.status(200).json(new ApiResponse(200,student,"student details udated"))
+})
+
+
 
 
 
