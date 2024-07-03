@@ -21,6 +21,15 @@ const generateAccessRefreshToken = async (userId) => {
   }
 };
 
+//  payload ={
+//   "firstName": "sagnik",
+//   "lastName": "ghosh",
+//   "dob": "2000-01-01",
+//   "studentId": "12345",
+//   "email": "abcd@example.com",
+//   "password": "Test@2024"
+// } 
+
 // Register Student
 export const registerStudent = asyncHandler(async (req, res) => {
   const { firstName, lastName, dob, studentId, email, password } = req.body;
@@ -46,6 +55,8 @@ export const registerStudent = asyncHandler(async (req, res) => {
 
   res.status(201).json(new ApiResponse(201, newStudent, "Student registered successfully"));
 });
+
+
 
 // Login Student
 export const loginStudent = asyncHandler(async (req, res) => {
@@ -73,6 +84,8 @@ export const loginStudent = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, { student: loggedInStudent, accessToken, refreshToken }, "Login successful"));
 });
 
+
+
 // Logout Student
 export const logout = asyncHandler(async (req, res) => {
   await Student.findByIdAndUpdate(req.student._id, { refreshToken: null }, { new: true });
@@ -94,6 +107,8 @@ export const getStudentData = asyncHandler(async (req, res) => {
   }
   res.status(200).json(new ApiResponse(200, student, "Student data retrieved successfully"));
 });
+
+
 
 // Refresh Access Token
 export const refreshAccessToken = asyncHandler(async (req, res) => {
@@ -130,6 +145,8 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, { accessToken, refreshToken: newRefreshToken }, "Access token refreshed"));
 });
 
+
+
 // Change Password
 export const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
@@ -146,6 +163,8 @@ export const changeCurrentPassword = asyncHandler(async (req, res) => {
   return res.status(200).json(new ApiResponse(200, {}, "Password changed successfully"));
 });
 
+
+
 // Update Student Details
 export const updateDetails = asyncHandler(async (req, res) => {
   const { firstName, lastName, email } = req.body;
@@ -161,6 +180,7 @@ export const updateDetails = asyncHandler(async (req, res) => {
       lastName, 
       email 
     },
+
     { new: true }
   ).select("-password");
 
