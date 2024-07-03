@@ -42,37 +42,41 @@ export const registerStudent = asyncHandler(async (req, res) => {
   if (existingStudent) {
     throw new ApiError(409, "Student with this studentId or email already exists");
   }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const newStudent = await Student.create({
+  console.log(password);
+ 
+  const newStudent = new Student({
     firstName,
     lastName,
     dob,
     studentId,
     email,
-    password: hashedPassword,
+    password
   });
-
+  
+  await newStudent.save();
   res.status(201).json(new ApiResponse(201, newStudent, "Student registered successfully"));
 });
-
-
 
 // Login Student
 export const loginStudent = asyncHandler(async (req, res) => {
   const { studentId, password } = req.body;
+  console.log("Received password:", password);
 
   const student = await Student.findOne({ studentId });
   if (!student) {
     throw new ApiError(404, "Student not found");
   }
+  
+  console.log("Stored hashed password:", student.password);
+  const isPasswordValid = await bcrypt.compare(password, student.password);
 
-  const isPasswordValid = await bcrypt.compare(password.trim(), student.password.trim());
+  console.log("Is password valid:", isPasswordValid);
   if (!isPasswordValid) {
     throw new ApiError(401, "Incorrect password");
   }
 
   const { accessToken, refreshToken } = await generateAccessRefreshToken(student._id);
+
   const loggedInStudent = await Student.findById(student._id).select("-password -refreshToken");
 
   const options = {
@@ -80,7 +84,9 @@ export const loginStudent = asyncHandler(async (req, res) => {
     secure: true,
   };
 
-  return res.status(200).cookie("accessToken", accessToken, options).cookie("refreshToken", refreshToken, options)
+  return res.status(200)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
     .json(new ApiResponse(200, { student: loggedInStudent, accessToken, refreshToken }, "Login successful"));
 });
 
