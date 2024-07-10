@@ -24,7 +24,7 @@ const generateAccessRefreshToken = async(userid)=>{
 }
 
 
-//  payload ={
+//  payload = {
 //   "firstName": "sagnik",
 //   "lastName": "ghosh",
 //   "dob": "2000-01-01",
@@ -32,6 +32,7 @@ const generateAccessRefreshToken = async(userid)=>{
 //   "email": "abcd@example.com",
 //   "password": "Test@2024"
 // } 
+
 export const registerStudent = asyncHandler(async (req, res) => {
   const { firstName, lastName, dob, studentId, email, password } = req.body;
 
@@ -40,26 +41,23 @@ export const registerStudent = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All fields are required");
   }
 
- 
   const existingStudent = await Student.findOne({ $or: [{ studentId }, { email }] });
   if (existingStudent) {
     throw new ApiError(409, "Student with this studentId or email already exists");
   }
 
-  
-  const hashedPassword = await bcrypt.hash(password, 10);
   const newStudent = await Student.create({
     firstName,
     lastName,
     dob,
     studentId,
     email,
-    password: hashedPassword,
+    password,
 
   });
 
-
-  res.status(201).json(new ApiResponse(201, newStudent, "Student registered successfully"));
+  return res.status(201).json(new ApiResponse(201, newStudent, "Student registered successfully"));
+  
 });
 
 // login ={
@@ -76,7 +74,6 @@ export const loginStudent = asyncHandler(async (req, res) => {
   if (!student) {
     throw new ApiError(404, "Student not found");
   }
-  // const isPasswordValid = await student.isPasswordCorrect(password)
   console.log("Provided Password:", password);
   console.log("Stored Hashed Password:", student.password);
 
@@ -101,7 +98,6 @@ export const loginStudent = asyncHandler(async (req, res) => {
       student:loggedInStudent,accessToken,refreshToken
     }, "Login successful"));
 });
-
 
 
 
@@ -178,18 +174,35 @@ export const refreshAccessToken = asyncHandler(async(req,res) =>{
 
 
 
-export const changeCurrentPassword = asyncHandler(async (req,res)=>{
-  const {oldPassword,newPassWord} = req.body
-  const student = await Student.findById(req.student?._id)
-  const isPasswordCorrect = await student.isPasswordCorrect(oldPassword)
-  if(!isPasswordCorrect){
-    throw new ApiError(401,"wrong password")
-   
+export const changeCurrentPassword = asyncHandler(async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  
+  if (!oldPassword || !newPassword) {
+    throw new ApiError(400, 'Old and new passwords are required');
   }
-  student.password = newPassWord
-  await user.save({validateBeforeSave : false})
-  return res.status(200).json(new ApiResponse(200,{},"Password changed successfully"))
-})
+  const student = await Student.findById(req.student?._id);
+  console.log()
+
+  if (!student) {
+    throw new ApiError(404, "Student not found");
+  }
+  
+  console.log('oldPassword:', oldPassword);
+  console.log('student.password:', student.password);
+
+  const isPasswordValid = await bcrypt.compare(oldPassword, student.password);
+  console.log(isPasswordValid);
+  
+  if (!isPasswordValid) {
+    throw new ApiError(401, "Wrong password");
+  }
+
+  student.password = newPassword;
+  
+  await student.save({ validateBeforeSave: false });
+
+  return res.status(200).json(new ApiResponse(200, {}, "Password changed successfully"));
+});
 
 
 
