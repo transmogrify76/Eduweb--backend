@@ -29,6 +29,7 @@ const generateAccessRefreshToken = async (userId) => {
 //   "email": "abcd@example.com",
 //   "password": "Test@2024"
 // } 
+
 export const registerStudent = asyncHandler(async (req, res) => {
   const { firstName, lastName, dob, studentId, email, password } = req.body;
 
@@ -53,6 +54,7 @@ export const registerStudent = asyncHandler(async (req, res) => {
   await newStudent.save();
   res.status(201).json(new ApiResponse(201, newStudent, "Student registered successfully"));
 });
+
 
 // Login Student
 export const loginStudent = asyncHandler(async (req, res) => {
@@ -83,6 +85,7 @@ export const loginStudent = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, { student: loggedInStudent, accessToken, refreshToken }, "Login successful"));
 });
 
+
 // Logout Student
 export const logout = asyncHandler(async (req, res) => {
   await Student.findByIdAndUpdate(req.student._id, { refreshToken: null }, { new: true });
@@ -98,6 +101,7 @@ export const logout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "User logged out"));
 });
 
+
 // Get Student Data
 export const getStudentData = asyncHandler(async (req, res) => {
   const student = await Student.findById(req.student._id).select("-password -refreshToken");
@@ -106,6 +110,7 @@ export const getStudentData = asyncHandler(async (req, res) => {
   }
   res.status(200).json(new ApiResponse(200, student, "Student data retrieved successfully"));
 });
+
 
 // Refresh Access Token
 export const refreshAccessToken = asyncHandler(async (req, res) => {
