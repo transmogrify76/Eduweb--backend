@@ -23,7 +23,7 @@ router.get("/data",verifyJWT, getStudentData);
 router.post("/refresh-token",refreshAccessToken)
 
 
-
+router.post("/register-parent",)
 
 //changing password
 router.post("/change-password", verifyJWT, changeCurrentPassword);

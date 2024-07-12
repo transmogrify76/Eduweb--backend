@@ -20,7 +20,6 @@ const generateAccessRefreshToken = async (userId) => {
   }
 };
 
-// Register Student
 //  payload = {
 //   "firstName": "sagnik",
 //   "lastName": "ghosh",
@@ -31,9 +30,9 @@ const generateAccessRefreshToken = async (userId) => {
 // } 
 
 export const registerStudent = asyncHandler(async (req, res) => {
-  const { firstName, lastName, dob, studentId, email, password } = req.body;
+  const { firstName, lastName, dob, studentId, email, classId, password } = req.body;
 
-  if (!firstName || !lastName || !dob || !studentId || !email || !password) {
+  if (!firstName || !lastName || !dob || !studentId || !email || !password || !classId) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -49,12 +48,13 @@ export const registerStudent = asyncHandler(async (req, res) => {
     studentId,
     email,
     password,
+    parent: null,
+    class: classId,
   });
 
   await newStudent.save();
   res.status(201).json(new ApiResponse(201, newStudent, "Student registered successfully"));
 });
-
 
 // Login Student
 export const loginStudent = asyncHandler(async (req, res) => {

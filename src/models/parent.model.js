@@ -43,23 +43,26 @@ const ParentSchema = new Schema({
     type:String,
   },
 
-  students: [{ student_id: { type: Schema.Types.ObjectId, ref: 'Student' } }]
-  },
+  studentId: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'Student' 
+   }
+},
 
 { timestamps: true }
 
 );
 
 
-ParentSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  try {
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
+// ParentSchema.pre('save', async function (next) {
+//   if (!this.isModified('password')) return next();
+//   try {
+//     this.password = await bcrypt.hash(this.password, 10);
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 ParentSchema.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password);

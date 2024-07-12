@@ -25,7 +25,9 @@ app.use(cookieParser());
 app.use(express.static("public"))
 
 import studentRout from "./routes/student.routes.js"
+import parentRout from "./routes/parent.routes.js"
 
 app.use("/student",studentRout)
+app.use("/parent",parentRout)
 
 export default app

@@ -40,16 +40,15 @@ const StudentSchema = new Schema({
     type: String,
   },
 
-  class_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'Class',
-
+  class: {
+    type: Number
   },
 
-  parents: [{
+  parent: {
     type: Schema.Types.ObjectId,
     ref: 'Parent',
-  }],
+    unique: true,
+  },
 
 }, { timestamps: true });
 
