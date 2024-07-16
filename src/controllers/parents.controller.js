@@ -3,18 +3,17 @@ import ApiError from "../utils/ApiError.js";
 import { Parent } from "../models/parent.model.js";
 import { Student } from "../models/student.model.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 
 const generateAccessRefreshToken = async(id) =>{
     try {
-       const parent = Parent.findById({id}) ;
+       const parent = Parent.findById(id) ;
        const accessToken = parent.generateAccessToken();
        const refreshToken = parent.generateRefreshToken();
        parent.refreshToken = refreshToken
        await parent.save({ validateBeforeSave: false })
-
 
        return {accessToken,refreshToken}
     } catch (error) {
@@ -61,9 +60,7 @@ export const parentRegister = asyncHandler(async (req, res) => {
     await student.save({ validateBeforeSave: false });
   
     return res.status(201).json(new ApiResponse(201, newParent, "New Parent Created Successfully"));
-  });
-
-
+});
 
 
 export const loginParent = asyncHandler(async(req,res)=>{
@@ -94,9 +91,7 @@ export const loginParent = asyncHandler(async(req,res)=>{
         accessToken,
         refreshToken
     }))
-
 })
-
 
 export const changeCurrentPassword = asyncHandler(async(req,res)=>{
     const {oldPassword,newPassword} = req.body;
@@ -128,7 +123,7 @@ export const updateDetails = asyncHandler(async (req, res) => {
     ).select("-password");
   
     return res.status(200).json(new ApiResponse(200, parent, "Student details updated"));
-  });
+});
   
 
 
