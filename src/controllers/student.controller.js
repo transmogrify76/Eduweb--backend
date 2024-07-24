@@ -20,14 +20,17 @@ const generateAccessRefreshToken = async (userId) => {
   }
 };
 
+
 //  payload = {
 //   "firstName": "sagnik",
 //   "lastName": "ghosh",
 //   "dob": "2000-01-01",
 //   "studentId": "12345",
 //   "email": "abcd@example.com",
-//   "password": "Test@2024"
+//   "password": "Test@2024",
+//   "classId": "1"
 // } 
+
 
 export const registerStudent = asyncHandler(async (req, res) => {
   const { firstName, lastName, dob, studentId, email, classId, password } = req.body;
@@ -148,6 +151,7 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
     .cookie("refreshToken", newRefreshToken, options)
     .json(new ApiResponse(200, { accessToken, refreshToken: newRefreshToken }, "Access token refreshed"));
 });
+
 
 // Change Password
 export const changeCurrentPassword = asyncHandler(async (req, res) => {

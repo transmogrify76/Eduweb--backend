@@ -1,0 +1,206 @@
+{
+    "name": "Jane Smith",
+    "subject": ["Math","physics","biology"],
+    "email":"abc@gmail.com",
+    "classSchedule": {
+      "2023": [
+        {  
+          "Monday": [
+                {
+                    "className": "10th Grade",
+                    "startTime": "09:00",
+                    "subject": "Math",
+                    "endTime": "10:00"
+                },
+                {
+                    "className": "10th Grade",
+                    "startTime": "11:00",
+                    "subject": "Math",
+                    "endTime": "12:00"
+                }
+
+          ]
+        },
+        {
+           "Tuesday": [
+                {
+                  "className": "10th Grade",
+                  "startTime": "10:00",
+                  "subject": "Math",
+                  "endTime": "11:00"
+                },
+                {
+                  "className": "11th Grade",
+                  "startTime": "12:00",
+                  "subject": "Math",
+                  "endTime": "13:00"
+                }
+          ]
+        },
+        {
+          "Wednesday": [
+              {
+                "className": "9th Grade",
+                "startTime": "10:00",
+                "subject": "Math",
+                "endTime": "11:00"
+              },
+              {
+                "className": "5th Grade",
+                "startTime": "12:00",
+                "subject": "Math",
+                "endTime": "13:00"
+              }
+            ]
+        },
+        {            
+            "Thursday": [
+              {
+                "className": "9th Grade",
+                "startTime": "10:00",
+                "subject": "Math",
+                "endTime": "11:00"
+              },
+              {
+                "className": "5th Grade",
+                "startTime": "12:00",
+                "subject": "Math",
+                "endTime": "13:00"
+              }
+            ]
+        },
+        {
+            "Friday": [
+              {
+                "className": "9th Grade",
+                "startTime": "10:00",
+                "subject": "Math",
+                "endTime": "11:00"
+              },
+              {
+                "className": "5th Grade",
+                "startTime": "12:00",
+                "subject": "Math",
+                "endTime": "13:00"
+              }
+            ]
+        },
+        {           
+            "Saturday": [
+              {
+                "className": "9th Grade",
+                "startTime": "10:00",
+                "subject": "Math",
+                "endTime": "11:00"
+              },
+              {
+                "className": "5th Grade",
+                "startTime": "12:00",
+                "subject": "Math",
+                "endTime": "13:00"
+              }
+            ]
+        }
+      ],
+      "2024": [
+        {  
+          "Monday": [
+                {
+                    "className": "10th Grade",
+                    "startTime": "09:00",
+                    "subject": "Math",
+                    "endTime": "10:00"
+                },
+                {
+                    "className": "10th Grade",
+                    "startTime": "11:00",
+                    "subject": "Math",
+                    "endTime": "12:00"
+                }
+          ]
+        },
+        {
+          "Tuesday": [
+                {
+                    "className": "10th Grade",
+                    "startTime": "10:00",
+                    "subject": "Math",
+                    "endTime": "11:00"
+                },
+                {
+                    "className": "11th Grade",
+                    "startTime": "12:00",
+                    "subject": "Math",
+                    "endTime": "13:00"
+                }
+          ]
+        },
+        {
+          "Wednesday": [
+                {
+                    "className": "9th Grade",
+                    "startTime": "10:00",
+                    "subject": "Math",
+                    "endTime": "11:00"
+                },
+                {
+                    "className": "5th Grade",
+                    "startTime": "12:00",
+                    "subject": "Math",
+                    "endTime": "13:00"
+                }
+            ]
+        },
+        {            
+            "Thursday": [
+              {
+                "className": "9th Grade",
+                "startTime": "10:00",
+                "subject": "Math",
+                "endTime": "11:00"
+              },
+              {
+                "className": "5th Grade",
+                "startTime": "12:00",
+                "subject": "Math",
+                "endTime": "13:00"
+              }
+            ]
+        },
+        {
+            "Friday": [
+              {
+                "className": "9th Grade",
+                "startTime": "10:00",
+                "subject": "Math",
+                "endTime": "11:00"
+              },
+              {
+                "className": "5th Grade",
+                "startTime": "12:00",
+                "subject": "Math",
+                "endTime": "13:00"
+              }
+            ]
+        },
+        {           
+            "Saturday": [
+              {
+                "className": "9th Grade",
+                "startTime": "10:00",
+                "subject": "Math",
+                "endTime": "11:00"
+              },
+              {
+                "className": "5th Grade",
+                "startTime": "12:00",
+                "subject": "Math",
+                "endTime": "13:00"
+              }
+            ]
+        }
+      ]
+
+    }
+}
+  

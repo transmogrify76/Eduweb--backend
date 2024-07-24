@@ -1,0 +1,52 @@
+{
+    "name": "Sagnik",
+    "class": "10th Grade",
+    "marks": {
+      "grad1": {
+        "term1": [
+          {
+            "subjectname": "bangla",
+            "marks": 50
+          },
+          {
+            "subjectname": "math",
+            "marks": 75
+          }
+        ],
+        "term2": [
+          {
+            "subjectname": "bangla",
+            "marks": 55
+          },
+          {
+            "subjectname": "math",
+            "marks": 80
+          }
+        ]
+      },
+    "grad2": {
+        "term1": [
+          {
+            "subjectname": "bangla",
+            "marks": 60
+          },
+          {
+            "subjectname": "math",
+            "marks": 85
+          }
+        ],
+
+        "term2": [
+          {
+            "subjectname": "bangla",
+            "marks": 65
+          },
+          {
+            "subjectname": "math",
+            "marks": 90
+          }
+        ]
+    }
+  }
+}
+  
